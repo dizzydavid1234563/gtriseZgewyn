@@ -396,16 +396,16 @@ end
 
 -- End of Aura
 
-local moveSet = {
-    punch1 = { animationId = "rbxassetid://10469493270" },
-    punch2 = { animationId = "rbxassetid://10469630950" },
-    punch3 = { animationId = "rbxassetid://10469639222" },
-    punch4 = { animationId = "rbxassetid://10469643643" }
-}
+local Test =  game.ReplicatedStorage.Emotes.VFX.VfxMods.FS.vfx.Aura.HumanoidRootPart.Torso
 
-local replacementMoveset = {
-    punch1 = { animationId = "rbxassetid://16515503507", startingTime = 0, endingTime = 1.5 },
-    punch2 = { animationId = "rbxassetid://16515520431", startingTime = 0, endingTime = 1.8 },
-    punch3 = { animationId = "rbxassetid://16515503507", startingTime = 0, endingTime = 2 },
-    punch4 = { animationId = "rbxassetid://18169291044", startingTime = 0, endingTime = 2.2 }
+local test = Test:Clone()
+test.Parent = game.Players.LocalPlayer.Character["HumanoidRootPart"]
 
+
+for _, child in ipairs(test:GetChildren()) do
+    if child:IsA("ParticleEmitter") then
+
+        child.Color = ColorSequence.new(Color3.new(1, 0, 0)) -- its set to one because its vfx lolo delete if u want
+        child:Emit(15)
+        child.Enabled = true
+    end
