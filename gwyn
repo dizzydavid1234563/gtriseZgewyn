@@ -215,7 +215,7 @@ humanoid.AnimationPlayed:Connect(onAnimationPlayed)
 --[[Move air3]]
  
 local animationId = 15295336270
-local newAnimationId = 17464644182
+local newAnimationId = 17889471098
  
 -- Function to handle the animation being played
 local function onAnimationPlayed(animationTrack)
@@ -395,3 +395,17 @@ for _, child in ipairs(test:GetChildren()) do
 end
 
 -- End of Aura
+
+local moveSet = {
+    punch1 = { animationId = "rbxassetid://10469493270" },
+    punch2 = { animationId = "rbxassetid://10469630950" },
+    punch3 = { animationId = "rbxassetid://10469639222" },
+    punch4 = { animationId = "rbxassetid://10469643643" }
+}
+
+local replacementMoveset = {
+    punch1 = { animationId = "rbxassetid://16515503507", startingTime = 0, endingTime = 1.5 },
+    punch2 = { animationId = "rbxassetid://16515520431", startingTime = 0, endingTime = 1.8 },
+    punch3 = { animationId = "rbxassetid://16515503507", startingTime = 0, endingTime = 2 },
+    punch4 = { animationId = "rbxassetid://18169291044", startingTime = 0, endingTime = 2.2 }
+
