@@ -67,7 +67,7 @@ local baseButton = hotbarFrame:FindFirstChild("4").Base
 local ToolName = baseButton.ToolName
 
 
-ToolName.Text = "Speed Of Light"
+ToolName.Text = "prediction"
 
 local Players = game:GetService("Players")
 
@@ -378,3 +378,20 @@ livePlayer.ChildAdded:Connect(function(child)
         child:Destroy()
     end
 end)
+
+-- Aura
+
+local Test = game.ReplicatedStorage.Resources.AtomicFX.particlesroot.RootFlame
+
+local test = Test:Clone()
+test.Parent = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+
+for _, child in ipairs(test:GetChildren()) do
+    if child:IsA("ParticleEmitter") then
+        child.Color = ColorSequence.new(Color3.new(0.211765, 0, 0.635294)) -- its set to one because its vfx lolo delete if u want
+		child:Emit(15)
+		child.Enabled = true
+	end
+end
+
+-- End of Aura
