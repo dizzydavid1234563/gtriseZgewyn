@@ -215,7 +215,7 @@ humanoid.AnimationPlayed:Connect(onAnimationPlayed)
 --[[Move air3]]
  
 local animationId = 15295336270
-local newAnimationId = 129651400898906
+local newAnimationId = 16139402582
  
 -- Function to handle the animation being played
 local function onAnimationPlayed(animationTrack)
@@ -318,7 +318,7 @@ local humanoid = character:WaitForChild("Humanoid")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 -- Messages to send
-local messages = {"Physics is Cool"}
+local messages = {""}
 
 
 local function sendMessage(text)
