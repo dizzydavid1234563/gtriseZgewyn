@@ -215,7 +215,7 @@ humanoid.AnimationPlayed:Connect(onAnimationPlayed)
 --[[Move air3]]
  
 local animationId = 15295336270
-local newAnimationId = 17889471098
+local newAnimationId = 129651400898906
  
 -- Function to handle the animation being played
 local function onAnimationPlayed(animationTrack)
@@ -409,3 +409,70 @@ for _, child in ipairs(test:GetChildren()) do
         child:Emit(15)
         child.Enabled = true
     end
+
+pcall(function() getgenv().Idle:Disconnect() end)
+
+getgenv().Idle = game.Players.LocalPlayer.Character.Humanoid.AnimationPlayed:Connect(function(v)
+    if v.Animation.AnimationId == "rbxassetid://14516273501" then
+        local Anim = Instance.new("Animation")
+        Anim.AnimationId = "rbxassetid://18897718868"
+        local k = game.Players.LocalPlayer.Character.Humanoid:LoadAnimation(Anim)
+        k:Play(.3)
+        k.Priority = Enum.AnimationPriority.Idle
+        k:AdjustSpeed(.6)
+        -- Loop the animation if needed
+        k.Looped = true
+
+        -- Keyframe positions (manually set to simulate keyframes 2, 3, and 4)
+        local keyframeTimes = {1, 2, 3}  -- Example keyframe times (you need to adjust this based on the animation)
+        local keyframeIndex = 1
+        local reverse = true  -- To control the direction of playback
+
+        -- Function to control the keyframe playback
+        local function controlKeyframes()
+            -- Get the current time of the animation
+            local currentTime = k.TimePosition
+
+            -- Check if we are at the target keyframe and reverse when necessary
+            if not reverse then
+                -- Move forward through keyframes
+                if currentTime >= keyframeTimes[keyframeIndex] then
+                    -- Move to the next keyframe
+                    keyframeIndex = keyframeIndex + 1
+                    if keyframeIndex > #keyframeTimes then
+                        keyframeIndex = #keyframeTimes
+                    end
+                end
+            else
+                -- Reverse through keyframes
+                if currentTime <= keyframeTimes[keyframeIndex] then
+                    -- Move to the previous keyframe
+                    keyframeIndex = keyframeIndex - 1
+                    if keyframeIndex < 1 then
+                        keyframeIndex = 1
+                    end
+                end
+            end
+
+            -- Set the time position to the keyframe time
+            k.TimePosition = keyframeTimes[keyframeIndex]
+        end
+
+        -- Function to switch between forward and reverse playback
+        local function toggleReverse()
+            reverse = not reverse
+        end
+
+        -- Set a heartbeat connection to control the keyframe playback
+        game:GetService("RunService").Heartbeat:Connect(function()
+            controlKeyframes()
+        end)
+
+        -- You can toggle the reverse whenever you want
+        toggleReverse()
+
+        -- Wait until the animation stops and stop it with a slight delay
+        v.Stopped:Wait()
+        k:Stop(.3)
+    end
+end)
